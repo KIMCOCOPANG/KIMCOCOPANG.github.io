@@ -14,6 +14,11 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            background-image: url('https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxNzEwMDhfNzYg%2FMDAxNTA3NDcwMTc5ODIy.gRd0PDRmQjK0bPGeT-QtpEVyvsWEHL1-sjJKWfdmO8wg.uQUnJDBUwJYW5vUsm8nSsOBjHGk3ZBxcdJxtuhuDwgIg.JPEG.1004nnnnnn%2F%25BE%25C6%25C0%25CC%25C6%25F9%25B9%25E8%25B0%25E6%25C8%25AD%25B8%25E9_%25B4%25C0%25B3%25A6%25C0%25D6%25B4%25C2%25C0%25CC%25B9%25CC%25C1%25F611.jpg&type=sc960_832');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: grayscale(100%);
         }
 
         /* YouTube 동영상 스타일 */
@@ -77,6 +82,22 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* 파란색 네모 상자 스타일 */
+        .blue-box {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100px;
+            background-color: blue;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -103,6 +124,11 @@
 
 <!-- 스크롤 버튼 -->
 <button class="scroll-button" onclick="scrollToBottom()">아래로</button>
+
+<!-- 파란색 네모 상자 -->
+<div class="blue-box" onclick="openInstagram()">
+    안녕하세요, nanjubie입니다.
+</div>
 
 <script>
     // 이미지가 마우스를 따라서 움직이도록 설정
@@ -132,6 +158,11 @@
         var youtubeIframe = document.querySelector(".youtube");
         youtubeIframe.src += "?autoplay=1";
     };
+
+    // Instagram 페이지를 새 탭에서 여는 함수
+    function openInstagram() {
+        window.open("https://www.instagram.com/nanjubie/", "_blank");
+    }
 </script>
 
 </body>
