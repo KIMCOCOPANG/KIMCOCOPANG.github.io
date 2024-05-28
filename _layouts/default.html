@@ -1,69 +1,39 @@
-<!doctype html>
-{% include copyright.html %}
-<html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
-  <head>
-    {% include head.html %}
-    {% include head/custom.html %}
-    <script>
-      // 페이지가 로드될 때 YouTube 동영상을 자동으로 재생하는 함수
-      window.onload = function() {
-        var youtubeIframe = document.getElementById("youtube-iframe");
-        youtubeIframe.src += "?autoplay=1";
-      };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Content</title>
+    <style>
+        /* 이미지 스타일 */
+        .image-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
 
-      // 마우스 이벤트에 따라 이미지를 한 바퀴 돌게 하는 함수
-      function rotateImage() {
-        var image = document.getElementById("image");
+<!-- YouTube 동영상 임베드 -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- 이미지 추가 -->
+<div class="image-container" onmouseover="rotateImage()">
+    <a href="https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EC%95%84%EC%9D%B4%EC%9C%A0&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+iframe&tqi=iDTgEdqVOZossB2CvAKsssssty0-448743" target="_blank">
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEwMTZfNzEg%2FMDAxNjk3NDYxNDgyNTI3.8u94zn7t7nw7Aujw2-15NU7NdbwajerVaSiChBZ3SKEg.8mSBd70bKN1IFbRJa0Ela1a44SiZxXYAjvte3ngU4fEg.JPEG.bbffff%2FScreenshot%25A3%25DF20231016%25A3%25DF220412%25A3%25DFNAVER.jpg&type=a340" width="200" height="200" alt="네이버 이미지">
+    </a>
+</div>
+
+<script>
+    // 마우스 이벤트에 따라 이미지를 한 바퀴 돌게 하는 함수
+    function rotateImage() {
+        var image = document.querySelector(".image-container img");
         image.style.transition = "transform 1s ease-in-out";
         image.style.transform = "rotate(360deg)";
-      }
-    </script>
-    <style>
-      /* 이미지 스타일 */
-      .image-container {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 20px;
-      }
-    </style>
-  </head>
+    }
+</script>
 
-  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
-    {% include_cached skip-links.html %}
-    {% include_cached masthead.html %}
-
-    <div class="initial-content">
-      {{ content }}
-      {% include after-content.html %}
-
-      <!-- YouTube 동영상 임베드 -->
-      <iframe id="youtube-iframe" width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-      <!-- 이미지 추가 -->
-      <div class="image-container" onmouseover="rotateImage()">
-        <a href="https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EC%95%84%EC%9D%B4%EC%9C%A0&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+iframe&tqi=iDTgEdqVOZossB2CvAKsssssty0-448743" target="_blank">
-          <img id="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEwMTZfNzEg%2FMDAxNjk3NDYxNDgyNTI3.8u94zn7t7nw7Aujw2-15NU7NdbwajerVaSiChBZ3SKEg.8mSBd70bKN1IFbRJa0Ela1a44SiZxXYAjvte3ngU4fEg.JPEG.bbffff%2FScreenshot%25A3%25DF20231016%25A3%25DF220412%25A3%25DFNAVER.jpg&type=a340" width="200" height="200" alt="네이버 이미지">
-        </a>
-      </div>
-
-      <!-- 네이버 웹사이트를 1280x720 크기로 임베드 -->
-      <iframe src="https://docs.google.com/spreadsheets/d/1U89w8yd8MImh-X3rDlVzsL0T7sr4ITE9D-ouNfITroI/edit#gid=1461925630" width="1000" height="720" frameborder="0"></iframe>
-    </div>
-
-    {% if site.search == true %}
-      <div class="search-content">
-        {% include_cached search/search_form.html %}
-      </div>
-    {% endif %}
-
-    <div id="footer" class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include_cached footer.html %}
-      </footer>
-    </div>
-
-    {% include scripts.html %}
-  </body>
+</body>
 </html>
