@@ -10,6 +10,19 @@
         var youtubeIframe = document.getElementById("youtube-iframe");
         youtubeIframe.src += "?autoplay=1";
       };
+
+      // 마우스 이벤트에 따라 이미지를 흔들게 하는 함수
+      function shakeImage() {
+        var image = document.getElementById("image");
+        image.style.transition = "transform 0.5s ease-in-out";
+        image.style.transform = "rotate(5deg)";
+        setTimeout(function() {
+          image.style.transform = "rotate(-5deg)";
+          setTimeout(function() {
+            image.style.transform = "rotate(0deg)";
+          }, 100);
+        }, 100);
+      }
     </script>
     <style>
       /* 이미지 스타일 */
@@ -34,9 +47,9 @@
       <iframe id="youtube-iframe" width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
       <!-- 이미지 추가 -->
-      <div class="image-container">
+      <div class="image-container" onmouseover="shakeImage()">
         <a href="https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EC%95%84%EC%9D%B4%EC%9C%A0&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+iframe&tqi=iDTgEdqVOZossB2CvAKsssssty0-448743" target="_blank">
-          <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEwMTZfNzEg%2FMDAxNjk3NDYxNDgyNTI3.8u94zn7t7nw7Aujw2-15NU7NdbwajerVaSiChBZ3SKEg.8mSBd70bKN1IFbRJa0Ela1a44SiZxXYAjvte3ngU4fEg.JPEG.bbffff%2FScreenshot%25A3%25DF20231016%25A3%25DF220412%25A3%25DFNAVER.jpg&type=a340" width="200" height="200" alt="네이버 이미지">
+          <img id="image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEwMTZfNzEg%2FMDAxNjk3NDYxNDgyNTI3.8u94zn7t7nw7Aujw2-15NU7NdbwajerVaSiChBZ3SKEg.8mSBd70bKN1IFbRJa0Ela1a44SiZxXYAjvte3ngU4fEg.JPEG.bbffff%2FScreenshot%25A3%25DF20231016%25A3%25DF220412%25A3%25DFNAVER.jpg&type=a340" width="200" height="200" alt="네이버 이미지">
         </a>
       </div>
 
