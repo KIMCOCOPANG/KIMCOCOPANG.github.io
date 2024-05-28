@@ -4,6 +4,13 @@
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    <script>
+      // 페이지가 로드될 때 YouTube 동영상을 자동으로 재생하는 함수
+      window.onload = function() {
+        var iframe = document.getElementById("youtube-iframe");
+        iframe.src += "?autoplay=1";
+      };
+    </script>
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
@@ -14,8 +21,8 @@
       {{ content }}
       {% include after-content.html %}
 
-      <!-- YouTube 동영상 임베드 (자동 재생) -->
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- YouTube 동영상 임베드 -->
+      <iframe id="youtube-iframe" width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
       <!-- 네이버 웹사이트를 1280x720 크기로 임베드 -->
       <iframe src="https://docs.google.com/spreadsheets/d/1U89w8yd8MImh-X3rDlVzsL0T7sr4ITE9D-ouNfITroI/edit#gid=1461925630" width="1000" height="720" frameborder="0"></iframe>
