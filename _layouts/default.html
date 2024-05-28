@@ -5,22 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Embedded Content with Mouse Following Image</title>
     <style>
+        /* 전체 페이지 스타일 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* YouTube 동영상 스타일 */
+        .youtube-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        iframe.youtube {
+            width: 400px;
+            height: 300px;
+        }
+
+        /* 스프레드시트 스타일 */
+        .spreadsheet-container {
+            width: 800px;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        iframe.spreadsheet {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* 이미지 스타일 */
+        .image-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 300px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
         .following-image {
             position: fixed;
-            top: 0;
-            right: 0;
             width: 50px;
             height: 50px;
             pointer-events: none; /* 이미지가 마우스 이벤트를 가로채지 않도록 설정 */
         }
 
-        /* 사각 버튼 스타일 */
+        /* 스크롤 버튼 스타일 */
         .scroll-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
+            position: absolute;
+            top: 20px;
+            width: 100px;
             height: 50px;
             background-color: blue;
             color: white;
@@ -32,24 +81,27 @@
 </head>
 <body>
 
-  
-<!-- 구글 스프레드시트 추가 -->
-<iframe src="https://docs.google.com/spreadsheets/d/1U89w8yd8MImh-X3rDlVzsL0T7sr4ITE9D-ouNfITroI/edit#gid=1461925630" width="1000" height="720" frameborder="0"></iframe>
-  
 <!-- YouTube 동영상 임베드 -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="youtube-container">
+    <iframe class="youtube" src="https://www.youtube.com/embed/iV0zsC8MaEo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<!-- 스프레드시트 임베드 -->
+<div class="spreadsheet-container">
+    <iframe class="spreadsheet" src="https://docs.google.com/spreadsheets/d/1U89w8yd8MImh-X3rDlVzsL0T7sr4ITE9D-ouNfITroI/edit#gid=1461925630"></iframe>
+</div>
 
 <!-- 이미지 추가 -->
 <div class="image-container" onmouseover="rotateImage()">
     <a href="https://search.naver.com/search.naver?sm=tab_hty.top&where=image&ssc=tab.image.all&query=%EC%95%84%EC%9D%B4%EC%9C%A0&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+iframe&tqi=iDTgEdqVOZossB2CvAKsssssty0-448743" target="_blank">
-        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMDdfMTI5%2FMDAxNjc4MTg4OTU2NzY2.lNV7t5E1Xs6sUf4ERY9TpL_NtwHe9OXu-kgKzI9_iD0g.cuQtSStiSyDGBESSAm8SSs00pa5De54o-Snc7A_9N00g.JPEG.scroll1013%2F47a71c15e1377efb680cfc83c6ccd5d6.jpg&type=sc960_832" width="200" height="200" alt="네이버 이미지">
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMDdfMTI5%2FMDAxNjc4MTg4OTU2NzY2.lNV7t5E1Xs6sUf4ERY9TpL_NtwHe9OXu-kgKzI9_iD0g.cuQtSStiSyDGBESSAm8SSs00pa5De54o-Snc7A_9N00g.JPEG.scroll1013%2F47a71c15e1377efb680cfc83c6ccd5d6.jpg&type=sc960_832" alt="네이버 이미지">
     </a>
 </div>
 
 <!-- 마우스를 따라서 움직이는 이미지 추가 -->
 <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzAzMDdfMTI5%2FMDAxNjc4MTg4OTU2NzY2.lNV7t5E1Xs6sUf4ERY9TpL_NtwHe9OXu-kgKzI9_iD0g.cuQtSStiSyDGBESSAm8SSs00pa5De54o-Snc7A_9N00g.JPEG.scroll1013%2F47a71c15e1377efb680cfc83c6ccd5d6.jpg&type=sc960_832" class="following-image">
 
-<!-- 사각 버튼 -->
+<!-- 스크롤 버튼 -->
 <button class="scroll-button" onclick="scrollToBottom()">아래로</button>
 
 <script>
@@ -67,20 +119,19 @@
         image.style.transform = "rotate(360deg)";
     }
 
-    // 페이지의 맨 아래로 스크롤되는 함수
-    function scrollToBottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-    
     // 페이지의 맨 아래로 부드럽게 스크롤되는 함수
     function scrollToBottom() {
         window.scroll({
             top: document.body.scrollHeight,
             behavior: 'smooth'
         });
-    }  
-  
-  
+    }
+
+    // 페이지가 로드될 때 YouTube 동영상을 자동으로 재생하는 함수
+    window.onload = function() {
+        var youtubeIframe = document.querySelector(".youtube");
+        youtubeIframe.src += "?autoplay=1";
+    };
 </script>
 
 </body>
